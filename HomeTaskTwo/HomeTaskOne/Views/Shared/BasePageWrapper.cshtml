@@ -1,0 +1,59 @@
+﻿@model HomeTaskOne.Models.PageModels.PageModelBase
+
+<!DOCTYPE html>
+<html>
+    <head>
+        @if (ViewData.ContainsKey("StyleSheet"))
+        {
+            <link rel="stylesheet" href="~/Content/@ViewData["StyleSheet"]" />
+        }
+        <link rel="stylesheet" href="~/Content/CommonStyles.css" />
+    </head>
+    <body>
+
+        <header id="head">
+            @Model.HeaderText
+        </header>
+
+        <table class="content-wrapper" cellspacing="0" cellpadding="0">
+            <tr>
+                <td class="content" rowspan="@Model.MenuModel.MenuButtonTextToRedirectActionPathRelations.Count">
+                    @RenderBody()
+                </td>
+
+                <td class="side-menu-wrapper" valign="top">
+                    <div class="side-menu">
+
+                        <div class="menu-buttons-separator"></div>
+                        @foreach (KeyValuePair<string, string> menuButtonToActionPathRelation in Model.MenuModel.MenuButtonTextToRedirectActionPathRelations)
+                        {
+                            <button class="side-menu-button" onclick="menuNavigate('@menuButtonToActionPathRelation.Value');">
+                                @menuButtonToActionPathRelation.Key
+                            </button>
+                            <div class="menu-buttons-separator"></div>
+                        }
+
+                    </div>
+                </td>
+
+            </tr>
+        </table>
+
+        <footer>
+            <div class="footer-content">
+                <span class="footer-text">Copyright 2020</span>
+                <span class="go-top-button"><a href="#head">&nbsp;^&nbsp;</a></span>
+            </div>
+        </footer>
+
+        <script>
+
+            function menuNavigate(path) {
+                window.location = window.location.origin + "/" + path;
+            }
+
+        </script>
+
+    </body>
+</html>
+

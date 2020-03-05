@@ -1,0 +1,24 @@
+﻿.question-wrapper {
+    margin: 2.5vh;
+    padding: 1.5vh;
+    border-radius: 5px;
+    background-color: #DAE4E5;
+    border: 0.5vh outset #DAE4E5;
+}
+
+.question-title {
+    font-size: 1.5em;
+    margin-bottom: 1vh;
+    color: #2B4A4A;
+    text-indent: 5vh;
+    font-weight: bold;
+}
+
+.question-text {
+    color: #296E6B;
+    text-indent: 3vh;
+}
+
+.result-form-wrapper {
+    margin: 2vh;
+}

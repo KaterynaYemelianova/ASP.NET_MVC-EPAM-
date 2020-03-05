@@ -1,0 +1,34 @@
+﻿@model HomeTaskOne.Models.PageModels.GuestPageModel
+
+@{
+    ViewData["StyleSheet"] = "GuestPageStyles.css";
+    Layout = "~/Views/Shared/BasePageWrapper.cshtml";
+}
+
+@helper RenderReview(HomeTaskOne.Models.PageItemModels.Review review, int level = 0) 
+{
+<div class="review-wrapper">
+    <div class="review-title">@review.Title - @review.AuthorName - @review.ReviewDate.ToString()</div>
+    <div class="review-text">@review.Body</div>
+
+    @foreach(HomeTaskOne.Models.PageItemModels.Review daughterReview in review.Answers)
+    {
+        @RenderReview(daughterReview, level++)
+    }
+
+</div>
+}
+
+@foreach(HomeTaskOne.Models.PageItemModels.Review review in Model.Reviews)
+{
+    @RenderReview(review)
+}
+
+<center>
+    <form class="review-form-wrapper" action="/Home/AddReview">
+        <input type="text" name="author" placeholder="Author Name" class="review-form-input" />
+        <input type="text" name="title" placeholder="Review Title" class="review-form-input" />
+        <input type="text" name="text" placeholder="Review Text" class="review-form-input" />
+        <button type="submit" class="review-form-submit">Add review</button>
+    </form>
+</center>

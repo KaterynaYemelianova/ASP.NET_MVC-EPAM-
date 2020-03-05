@@ -1,0 +1,64 @@
+﻿html, body {
+    margin: 0;
+    padding: 0;
+}
+
+header, footer {
+    height: 7vh;
+    text-align: center;
+
+    color: #DAE4E5;
+    background-color: #2B4A4A;
+}
+
+header {
+    font-size: 5vh;
+}
+
+footer {
+    height: 2vh;
+    font-size: 2vh;
+    padding: 2.5vh;
+}
+
+.footer-text {
+    margin-right: 40vw;
+}
+
+.go-top-button {
+    padding: 1vh;
+    margin-right: -40vw;
+    border-radius: 7vh;
+    background-color: #DAE4E5;
+}
+
+.content-wrapper {
+    width: 100%;
+    height: 86vh;
+}
+
+.content {
+    width: 80%;
+}
+
+.side-menu-wrapper {
+    width: 20%;
+    height: 100%;
+}
+
+.side-menu {
+    padding-top: 2.5vh;
+}
+
+.side-menu-button {
+    border: 0;
+    height: 5vh;
+    width: 100%;
+    background-color: white;
+}
+
+.menu-buttons-separator {
+    width: 100%;
+    height: 0.1vh;
+    background-color: #2B4A4A;
+}

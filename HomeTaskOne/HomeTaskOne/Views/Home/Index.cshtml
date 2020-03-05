@@ -1,0 +1,15 @@
+﻿@model HomeTaskOne.Models.PageModels.HomePageModel
+
+@{
+    Layout = "~/Views/Shared/BasePageWrapper.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/ArticlesStyles.css" />
+
+@foreach(HomeTaskOne.Models.PageItemModels.Article article in Model.Articles) 
+{
+    <div class="article-wrapper">
+        <div class="article-title">@article.Title</div>
+        <div class="article-text">@article.Body</div>
+    </div>
+}

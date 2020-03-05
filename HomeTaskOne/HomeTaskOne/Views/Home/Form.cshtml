@@ -1,0 +1,74 @@
+﻿@model HomeTaskOne.Models.PageModels.FormPageModel
+
+@{
+    Layout = "~/Views/Shared/BasePageWrapper.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/FormPageStyles.css" />
+
+@foreach (HomeTaskOne.Models.PageItemModels.Question question in Model.Questions)
+{
+    <div class="question-wrapper">
+        <div class="article-title">@question.Title</div>
+        <div class="article-text">@question.Body</div>
+
+        @{ string type = question.IsMultiselect ? "checkbox" : "radio"; }
+
+        <fieldset>
+            @foreach (HomeTaskOne.Models.PageItemModels.Variant variant in question.Variants.Keys)
+            {
+                <input id="question_{@question.Id}_variant_{@variant.Id}_answer" name="question_{@question.Id}_answer_variant" type="@type" />
+                <label for="question_{@question.Id}_variant_{@variant.Id}_answer">@variant.DisplayText</label>
+            }
+        </fieldset>
+    </div>
+}
+
+<center>
+    <button onclick="sendForCheck();">Check</button>
+</center>
+
+<script>
+
+    function sendForCheck() {
+
+        @{
+            IEnumerable<(int qid, int vid)> variants = Model.Questions.Aggregate(new List<(int, int)>(), (A, Q) => A.Concat(Q.Variants.Select(V => (Q.Id, V.Key.Id))).ToList());
+        }
+
+        let data = [];
+
+        @foreach ((int qid, int vid) in variants)
+        {
+            string id = "question_{" + qid + "}_variant_{" + vid + "}_answer";
+
+            <text>
+                data.push({
+                    question_id : @qid,
+                    variant_id : @vid,
+                    selected : document.getElementById('@id').checked
+                });
+            </text>
+        }
+
+        let request = new XMLHttpRequest();
+        request.open("POST", "/Home/CheckForm");
+        request.setRequestHeader('Content-Type', 'application/json');
+        request.setRequestHeader('Accept', 'application/json');
+
+        request.onloadend = function() {
+            if (request.status == 200) {
+                let parsed = JSON.parse(request.responseText);
+                alert(parsed.Right + " answers're right of " + parsed.Total);
+            }
+            else {
+
+            }
+        };
+
+        request.send(JSON.stringify(data));
+
+        return false;
+    }
+
+</script>
